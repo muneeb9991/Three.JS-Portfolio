@@ -5,14 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style.css">
         <title>First ThreeJS Project</title>
-        <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@<0.162.0>/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@<0.162.0>/examples/jsm/"
-    }
-  }
-</script>
     </head>
 
     <body>
@@ -23,44 +15,50 @@
 
         <main>
             <script type="module">
-                    import * as THREE from 'three';
-                    // Create a scene, camera, and renderer
-                    const scene = new THREE.Scene();
-                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                    const renderer = new THREE.WebGLRenderer();
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                    document.body.appendChild(renderer.domElement);
-
-                    // FontLoader to load a font
-                    const loader = new THREE.FontLoader();
-
-                    loader.load( 'fonts/roboto_regular.typeface.json', function ( font ) {
-                        const geometry = new THREE.TextGeometry( 'Hello Three.js!', {
-                            font: font,
-                            size: 80,
-                            height: 5,
-                            curveSegments: 12,
-                            bevelEnabled: true,
-                            bevelThickness: 10,
-                            bevelSize: 8,
-                            bevelOffset: 0,
-                            bevelSegments: 5
-                        });
-                        const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-                        const textMesh = new THREE.Mesh(geometry, material);
-                        scene.add(textMesh);
-                        camera.position.z = 500;
-                        const animate = function () {
-                            requestAnimationFrame(animate);
-                            textMesh.rotation.x += 0.01;
-                            textMesh.rotation.y += 0.01;
-
-                            renderer.render(scene, camera);
-                        };
-                        animate();
+                // Import the main Three.js library
+                import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+            
+                // Import the FontLoader and TextGeometry modules
+                import { FontLoader } from 'https://unpkg.com/three/examples/jsm/loaders/FontLoader.js';
+                import { TextGeometry } from 'https://unpkg.com/three/examples/jsm/geometries/TextGeometry.js';
+            
+                // Your Three.js code follows
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                document.body.appendChild(renderer.domElement);
+            
+                // FontLoader to load a font
+                const loader = new FontLoader();
+            
+                loader.load('fonts/roboto_regular.typeface.json', function (font) {
+                    const geometry = new TextGeometry('Hello Three.js!', {
+                        font: font,
+                        size: 80,
+                        height: 5,
+                        curveSegments: 12,
+                        bevelEnabled: true,
+                        bevelThickness: 10,
+                        bevelSize: 8,
+                        bevelOffset: 0,
+                        bevelSegments: 5
                     });
-
+                    const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+                    const textMesh = new THREE.Mesh(geometry, material);
+                    scene.add(textMesh);
+                    camera.position.z = 500;
+                    const animate = function () {
+                        requestAnimationFrame(animate);
+                        textMesh.rotation.x += 0.01;
+                        textMesh.rotation.y += 0.01;
+            
+                        renderer.render(scene, camera);
+                    };
+                    animate();
+                });
             </script>
+            
         </main>
 
         <footer>
