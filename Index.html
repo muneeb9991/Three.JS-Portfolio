@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>First ThreeJS Project</title>
+    </head>
+
+    <body>
+        <header>
+            
+        </header>
+    
+
+        <main>
+            <script type="module">
+                    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
+                    // Create a scene, camera, and renderer
+                    const scene = new THREE.Scene();
+                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    const renderer = new THREE.WebGLRenderer();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    document.body.appendChild(renderer.domElement);
+
+                    // FontLoader to load a font
+                    const loader = new THREE.FontLoader();
+
+                    loader.load( 'fonts/roboto_regular.typeface.json', function ( font ) {
+                        const geometry = new THREE.TextGeometry( 'Hello Three.js!', {
+                            font: font,
+                            size: 80,
+                            height: 5,
+                            curveSegments: 12,
+                            bevelEnabled: true,
+                            bevelThickness: 10,
+                            bevelSize: 8,
+                            bevelOffset: 0,
+                            bevelSegments: 5
+                        });
+                        const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+                        const textMesh = new THREE.Mesh(geometry, material);
+                        scene.add(textMesh);
+                        camera.position.z = 500;
+                        const animate = function () {
+                            requestAnimationFrame(animate);
+                            textMesh.rotation.x += 0.01;
+                            textMesh.rotation.y += 0.01;
+
+                            renderer.render(scene, camera);
+                        };
+                        animate();
+                    });
+
+            </script>
+        </main>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>
